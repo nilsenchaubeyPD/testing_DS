@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Published Assessment Layout Sage & Ink</title>
+<title>Assessment Details</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap">
@@ -718,7 +718,7 @@ try{const saved=localStorage.getItem("pa-tab");const t=saved&&document.getElemen
 const toast=document.getElementById("toast");let tt;
 function say(m){toast.textContent=m;toast.hidden=false;clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true},2200);}
 (function(){const b=document.getElementById("copy"),ic=document.getElementById("copyIc"),tx=document.getElementById("copyTx");let t;
- const check='<svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+ const check='<svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
  function copied(){ic.innerHTML=check;tx.textContent="Copied";b.classList.add("done");clearTimeout(t);t=setTimeout(function(){ic.innerHTML=icon("copy",20);tx.textContent="Copy";b.classList.remove("done");},2000);}
  b.addEventListener("click",function(){const u=document.querySelector("#url span").textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(copied,fallback);}else{fallback();}});
  function fallback(){selectUrl();let ok=false;try{ok=document.execCommand("copy");}catch(e){}if(ok){getSelection().removeAllRanges();copied();}else say("Press Ctrl+C to copy");}})();
@@ -776,7 +776,7 @@ document.addEventListener("click",closeRowMenus);
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeRowMenus();});
 (function(){const sel=document.getElementById("statusSel"),btn=sel.querySelector(".sel-btn"),menu=sel.querySelector(".menu");const opts=[["all","All statuses"],["done","All Attempted"],["at","Attempted"],["ip","In Progress"],["sh","Shortlisted"],["rj","Rejected"]];
  window.setStatus=function(v){document.getElementById("statusVal").textContent=opts.find(o=>o[0]===v)[1];paint();};
- const tick='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+ const tick='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
  function paint(){menu.innerHTML=opts.map(o=>'<li role="option" data-v="'+o[0]+'" aria-selected="'+(tbl.st===o[0])+'"><span class="grow">'+o[1]+'</span>'+(tbl.st===o[0]?tick:'')+'</li>').join("");}
  paint();btn.addEventListener("click",function(e){e.stopPropagation();menu.hidden=!menu.hidden;btn.setAttribute("aria-expanded",!menu.hidden);});
  menu.addEventListener("click",function(e){const li=e.target.closest("[data-v]");if(!li)return;tbl.st=li.dataset.v;tbl.page=1;document.getElementById("statusVal").textContent=opts.find(o=>o[0]===tbl.st)[1];paint();menu.hidden=true;btn.setAttribute("aria-expanded","false");render();syncKpis();});
@@ -834,7 +834,7 @@ renderAdv("proctoring");
 const drawer=document.getElementById("drawer"),scrim=document.getElementById("scrim"),people=document.getElementById("people");let n=0;
 function personRow(){n++;const d=document.createElement("div");d.className="prow person-row";d.innerHTML='<input class="inp" id="nm'+n+'" aria-label="Name" placeholder="Enter name"><input class="inp f2" id="ph'+n+'" aria-label="Phone Number" inputmode="tel" placeholder="Enter phone number"><div class="f3"><input class="inp" id="em'+n+'" aria-label="Email Id" type="email" placeholder="Enter email"><div class="err" hidden></div></div>'+(n>1?'<button type="button" class="rmbtn" aria-label="Remove row">'+icon("x",16)+'</button>':'<span></span>');const rm=d.querySelector(".rmbtn");if(rm)rm.addEventListener("click",function(){d.remove()});d.querySelector('input[type=email]').addEventListener("input",function(){this.nextElementSibling.hidden=true});people.appendChild(d);}
 (function(){const sel=document.getElementById("inviteBy"),btn=sel.querySelector(".sel-btn"),menu=sel.querySelector(".menu"),opts=[...menu.querySelectorAll("li")];
- const tick=icon("chevron-right",0)&&'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+ const tick=icon("chevron-right",0)&&'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
  function paint(){opts.forEach(function(o){const t=o.querySelector("svg");if(t)t.remove();if(o.getAttribute("aria-selected")==="true")o.insertAdjacentHTML("beforeend",tick);});}
  paint();
  function open(v){menu.hidden=!v;btn.setAttribute("aria-expanded",v);}
@@ -905,5 +905,3 @@ document.getElementById("inviteForm").addEventListener("submit",function(e){e.pr
  window.homeNav=function(){setNav(document.querySelector('.rail .nav[data-page="Home"]'));};
 })();
 </script>
-
-</body></html>

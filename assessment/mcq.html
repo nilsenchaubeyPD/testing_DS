@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Assessment Question Screen</title>
+<title>MCQ Question</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -93,12 +93,12 @@ kbd.k{display:inline-flex;align-items:center;justify-content:center;min-width:22
 <body>
 <header class="top">
   <div class="brand" aria-label="NxtWave"><span>NXT</span><span>WAVE</span></div>
-  <div class="tr"><button class="it" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 7.5v5M12 16h.01"/></svg>Report</button><span class="it good"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0"/><path d="M5 12.4a10.5 10.5 0 0 1 14 0"/><path d="M8.5 16a5.5 5.5 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><b>Excellent</b></span><button class="it" type="button">Isaac <svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+  <div class="tr"><button class="it" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4m0 4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Z"/></svg>Report</button><span class="it good"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19.5h.01M22.806 8.7A15.942 15.942 0 0 0 12 4.5c-4.166 0-7.96 1.592-10.807 4.2m3.539 3.543A10.958 10.958 0 0 1 12 9.5a10.96 10.96 0 0 1 7.268 2.743m-3.57 3.532A5.974 5.974 0 0 0 12 14.5c-1.416 0-2.718.49-3.745 1.312"/></svg><b>Excellent</b></span><button class="it" type="button">Isaac <svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button></div>
 </header>
 <div class="sub"><div class="row">
-  <div class="l"><div class="ttl" title="Front End Technical MCQ Assessment">Front End Technical MC&#8230;</div><button class="lnk" id="ins" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6h.01"/></svg>Instructions</button></div>
-  <div class="timer" id="timer" role="timer" aria-label="Time remaining"><svg class="ic" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></svg><span id="tm">23 : 59</span></div>
-  <div class="r"><span class="att">Questions Attempted <span class="badge br" id="att">2/41</span></span><button class="lnk" id="end" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M9 9l6 6M15 9l-6 6"/></svg>End Section</button></div>
+  <div class="l"><div class="ttl" title="Front End Technical MCQ Assessment">Front End Technical MC&#8230;</div><button class="lnk" id="ins" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16v-4m0-4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Z"/></svg>Instructions</button></div>
+  <div class="timer" id="timer" role="timer" aria-label="Time remaining"><svg class="ic" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6v6l4 2m6-2c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Z"/></svg><span id="tm">23 : 59</span></div>
+  <div class="r"><span class="att">Questions Attempted <span class="badge br" id="att">2/41</span></span><button class="lnk" id="end" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 9-6 6m0-6 6 6m7-3c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Z"/></svg>End Section</button></div>
 </div>
   <div class="bar" role="progressbar" aria-label="Time left" aria-valuemin="0" aria-valuemax="100" aria-valuenow="96"><i id="prog"></i></div>
 </div>
@@ -136,6 +136,7 @@ kbd.k{display:inline-flex;align-items:center;justify-content:center;min-width:22
   <div class="row"><button class="btn sec" id="eN" type="button">Cancel</button><button class="btn pri" id="eY" type="button">End Section</button></div></div></div>
 <div class="toast" id="toast" role="status" hidden></div>
 <script>
+function goScreen(s){try{if(window.parent!==window){window.parent.postMessage({topinGo:s},"*");return;}}catch(e){}location.href=s+".html";}
 (function(){
  var TOTAL=41,LIMIT=1500,left=1439;
  var Q=[["Which HTML tag is used to define an internal style sheet?",["<script>","<style>","<css>","<link>"]],
@@ -171,8 +172,8 @@ kbd.k{display:inline-flex;align-items:center;justify-content:center;min-width:22
  tick();var iv=setInterval(function(){if(left>0){left--;tick();}else{clearInterval(iv);say("Time is up");}},1000);
  function modal(id,open){$(id).hidden=!open;}
  $("ins").addEventListener("click",function(){modal("ovI",true);$("iC").focus();});$("iC").addEventListener("click",function(){modal("ovI",false);$("ins").focus();});
- $("end").addEventListener("click",function(){var A=pal();$("eP").textContent="You have attempted "+A+" of "+TOTAL+" questions. "+(TOTAL-A)+" unattempted questions will be submitted blank.";modal("ovE",true);$("eN").focus();});
- $("eN").addEventListener("click",function(){modal("ovE",false);$("end").focus();});$("eY").addEventListener("click",function(){modal("ovE",false);say("Section ended");});
+ $("end").addEventListener("click",function(){var A=pal();$("eP").textContent="You have attempted "+A+" of "+TOTAL+" questions. "+(TOTAL-A)+" unattempted questions will be submitted blank. Next up: the Coding section.";modal("ovE",true);$("eN").focus();});
+ $("eN").addEventListener("click",function(){modal("ovE",false);$("end").focus();});$("eY").addEventListener("click",function(){modal("ovE",false);goScreen("coding");});
  document.addEventListener("keydown",function(e){if(e.key==="Escape"){modal("ovI",false);modal("ovE",false);return;}
   if(!$("ovI").hidden||!$("ovE").hidden||e.ctrlKey||e.metaKey||e.altKey)return;var tg=e.target.tagName;if(tg==="TEXTAREA"||tg==="INPUT"&&e.target.type!=="radio")return;
   var k=e.key.toUpperCase(),idx="ABCD".indexOf(k);if(idx<0&&/^[1-4]$/.test(k))idx=+k-1;

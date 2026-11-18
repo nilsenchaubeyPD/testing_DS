@@ -12,4 +12,5 @@ iframe{flex:1;border:0;width:100%;background:#f5f5f4}</style></head><body>
 function mark(i){[].forEach.call(t.children,function(b,k){b.setAttribute("aria-selected",k==i)})}
 function go(i){mark(i);f.src=T[i][1];try{history.replaceState(null,"","#"+i)}catch(e){}}
 T.forEach(function(d,i){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.textContent=d[0];b.onclick=function(){go(i)};t.appendChild(b)});
+var SLUG=T.map(function(x){return x[1].replace("assessment/","").replace(".html","")});window.addEventListener("message",function(e){var d=e.data;if(d&&d.topinGo){for(var i=0;i<SLUG.length;i++)if(SLUG[i]===d.topinGo){go(i);t.children[i].focus();break;}}});
 var s=parseInt((location.hash||"#0").slice(1),10);go(s>=0&&s<T.length?s:0);</script></body></html>

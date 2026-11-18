@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assessment Feedback</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--page:#f5f5f4;--bg-2:#fafaf9;--text-1:#1c1917;--text-2:#44403c;--text-3:#57534e;--text-4:#78716c;--border-1:#d6d3d1;--border-2:#e7e5e4;
+--brand:#1c1917;--brand-700:#44403c;--brand-50:#f2f7f4;--brand-100:#c3d9cb;--ok:#12b76a;--ok-50:#ecfdf3;--ok-200:#abefc6;--ok-700:#067647;--bad:#d92d20;
+--sh-btn:0 1px 2px rgba(0,0,0,.05),inset 0 -2px 0 rgba(0,0,0,.05),inset 0 0 0 1px rgba(0,0,0,.18);--ring:0 0 0 2px #fff,0 0 0 4px var(--brand-100);
+--font:"Manrope",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}[hidden]{display:none!important}html,body{margin:0}
+body{background:var(--page);color:var(--text-1);font-family:var(--font);font-size:14px;line-height:20px;min-width:1024px;min-height:100vh;display:flex;flex-direction:column}
+button,textarea{font-family:inherit}button{cursor:pointer}svg.ic{display:block;flex:none}
+.top{height:64px;background:var(--bg);border-bottom:1px solid var(--border-2);display:flex;align-items:center;justify-content:space-between;padding:0 32px}
+.brand{font-weight:800;font-size:20px;line-height:18px;letter-spacing:-.02em;color:#0b4a8f;display:flex;flex-direction:column}
+.tr{display:flex;align-items:center;gap:24px;color:var(--text-2);font-weight:500}
+.tr .it{display:inline-flex;align-items:center;gap:8px;background:none;border:0;color:inherit;padding:6px 4px;border-radius:8px;font-size:14px}
+.tr .it:hover{background:var(--bg-2)}.tr .good{color:var(--ok)}.tr .good b{color:var(--text-2);font-weight:500}
+main{flex:1;display:flex;flex-direction:column;align-items:center;padding:48px 16px 32px}
+h1{margin:0;font-size:30px;line-height:38px;font-weight:600;letter-spacing:-.01em;text-align:center}
+.lead{margin:8px 0 32px;font-size:16px;line-height:24px;color:var(--text-3);text-align:center}
+.card{width:100%;max-width:640px;background:var(--bg);border:1px solid var(--border-2);border-radius:12px;padding:32px}
+.card h2{margin:0;font-size:18px;line-height:28px;font-weight:600}
+.rate{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:24px 0 0;padding:0;border:0}
+.rate legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.face{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer}
+.face input{position:absolute;opacity:0;pointer-events:none}
+.face .em{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:40px;line-height:1;background:var(--bg-2);border:1px solid var(--border-2);filter:grayscale(.65);opacity:.75;transition:transform .12s,filter .12s,opacity .12s}
+.face:hover .em{filter:none;opacity:1;transform:scale(1.04)}
+.face input:checked+.em{filter:none;opacity:1;background:var(--brand-50);border:2px solid var(--brand);transform:scale(1.06)}
+.face input:focus-visible+.em{box-shadow:var(--ring)}
+.face .lb{height:22px;display:inline-flex;align-items:center;padding:2px 8px;border-radius:9999px;font-size:12px;line-height:18px;font-weight:500;color:var(--text-4)}
+.face input:checked~.lb{background:var(--brand-50);border:1px solid var(--brand-100);color:var(--brand-700)}
+.sec{margin-top:28px}
+.lab{display:block;font-size:14px;line-height:20px;font-weight:500;color:var(--text-2);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:28px;padding:4px 10px;border-radius:9999px;border:1px solid var(--border-2);background:#fff;color:var(--text-2);font-size:14px;line-height:20px;font-weight:500}
+.chip:hover{border-color:var(--border-1)}
+.chip[aria-pressed="true"]{background:var(--brand-50);border-color:var(--brand-100);color:var(--brand-700)}
+.chip[aria-pressed="true"]:hover{background:var(--brand-100)}
+.chip:focus-visible,.btn:focus-visible,.tr .it:focus-visible{outline:0;box-shadow:var(--ring)}
+textarea{display:block;width:100%;min-height:120px;resize:vertical;padding:12px 14px;border:1px solid var(--border-1);border-radius:8px;background:#fff;font-size:16px;line-height:24px;color:var(--text-1);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+textarea::placeholder{color:var(--text-4)}
+textarea:focus{outline:0;border-color:var(--brand);box-shadow:0 1px 2px rgba(0,0,0,.05),0 0 0 4px var(--brand-100)}
+.cnt{margin-top:6px;font-size:14px;color:var(--text-3);text-align:right}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:44px;padding:10px 16px;border-radius:8px;border:0;font-size:16px;line-height:24px;font-weight:600;background:var(--brand);color:#fff;box-shadow:var(--sh-btn);margin-top:28px}
+.btn:hover{background:var(--brand-700)}
+.btn:disabled{background:var(--bg-2);color:var(--text-4);box-shadow:inset 0 0 0 1px var(--border-2);cursor:not-allowed}
+.done{text-align:center;padding:16px 0 8px}
+.fi{width:56px;height:56px;border-radius:50%;margin:0 auto 20px;display:grid;place-items:center;background:var(--ok-50);color:var(--ok);box-shadow:0 0 0 8px #f7fdf9}
+.done h2{font-size:20px;line-height:30px}.done p{margin:8px 0 0;font-size:16px;line-height:24px;color:var(--text-3)}
+.pw{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:40px;color:var(--text-3);font-weight:500}
+.powered-logo{height:22px;width:auto;display:block}
+
+/* Sage & Ink: sage accent for progress and focus */
+.bar i,.credits .meter i,.prog i{background:#6e9a7c!important}
+</style></head><body>
+<header class="top">
+  <div class="brand" aria-label="NxtWave"><span>NXT</span><span>WAVE</span></div>
+  <div class="tr"><button class="it" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 7.5v5M12 16h.01"/></svg>Report</button><span class="it good"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0"/><path d="M5 12.4a10.5 10.5 0 0 1 14 0"/><path d="M8.5 16a5.5 5.5 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><b>Excellent</b></span><button class="it" type="button">Isaac <svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+</header>
+<main>
+  <h1>Thank you for attending the assessment</h1>
+  <p class="lead">We&rsquo;ll get in touch with you shortly</p>
+  <section class="card" id="form" aria-labelledby="rt">
+    <h2 id="rt">Rate your overall experience</h2>
+    <fieldset class="rate" id="rate"><legend>Overall experience</legend></fieldset>
+    <div class="sec" id="why" hidden><span class="lab" id="whyL">What went wrong?</span><div class="chips" id="chips" role="group" aria-labelledby="whyL"></div></div>
+    <div class="sec"><label class="lab" for="note">Anything else you want to tell us? <span style="color:var(--text-4);font-weight:400">(Optional)</span></label>
+      <textarea id="note" maxlength="500" placeholder="Share your thoughts"></textarea><div class="cnt"><span id="cn">0</span>/500</div></div>
+    <button class="btn" id="sub" type="button" disabled>Submit</button>
+  </section>
+  <section class="card done" id="ok" hidden tabindex="-1" aria-labelledby="okT">
+    <div class="fi"><svg class="ic" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2 id="okT">Feedback submitted</h2><p>Thanks for helping us improve. You can close this window now.</p>
+  </section>
+  <div class="pw">Powered by <svg class="powered-logo" viewBox="0 24 555 74" role="img" aria-label="topin.tech">
+<path d="M66.2755 28.1699L44.7356 49.7097H58.7624C59.5517 49.7097 60.1915 50.3496 60.1915 51.1389V61.9046C60.1915 63.1778 61.7309 63.8155 62.6312 62.9152L81.9935 43.5529C82.2615 43.2849 82.4121 42.9213 82.4121 42.5423V29.1805C82.4121 28.3912 81.7723 27.7513 80.983 27.7513H67.286C66.907 27.7513 66.5435 27.9019 66.2755 28.1699Z" fill="#82aa92"/>
+<path d="M44.7727 28.8138V49.7122H3.45025C2.17702 49.7122 1.53939 48.1728 2.43969 47.2725L21.909 27.8032C22.177 27.5352 22.5405 27.3846 22.9195 27.3846H43.3436C44.1329 27.3846 44.7727 28.0245 44.7727 28.8138Z" fill="#1c1917"/>
+<path d="M44.7721 80.7086V50.3596V49.7133L1.24182 93.2436C0.791667 93.6937 1.11049 94.4634 1.7471 94.4634H31.0173C31.5859 94.4634 32.1311 94.2376 32.5331 93.8355L44.1442 82.2244C44.5463 81.8224 44.7721 81.2771 44.7721 80.7086Z" fill="#1c1917"/>
+<path d="M132.937 87.6802C134.296 87.6802 135.689 87.5783 137.116 87.3744C138.543 87.1026 139.699 86.8308 140.582 86.559V93.3884C139.631 93.8641 138.272 94.2378 136.505 94.5097C134.738 94.8494 133.039 95.0193 131.408 95.0193C128.554 95.0193 125.904 94.5436 123.457 93.5923C121.079 92.573 119.142 90.8401 117.647 88.3938C116.152 85.9474 115.405 82.5157 115.405 78.0986V46.2959H107.658V42.0148L115.507 38.4472L119.074 26.8269H124.375V39.3646H140.174V46.2959H124.375V77.8948C124.375 81.2245 125.156 83.7049 126.719 85.3358C128.35 86.8988 130.423 87.6802 132.937 87.6802ZM194.945 66.5803C194.945 71.1333 194.333 75.1766 193.11 78.7102C191.955 82.1759 190.256 85.1319 188.014 87.5783C185.839 90.0247 183.155 91.8934 179.961 93.1845C176.835 94.4077 173.336 95.0193 169.462 95.0193C165.861 95.0193 162.531 94.4077 159.473 93.1845C156.415 91.8934 153.765 90.0247 151.522 87.5783C149.28 85.1319 147.513 82.1759 146.222 78.7102C144.998 75.1766 144.387 71.1333 144.387 66.5803C144.387 60.5324 145.406 55.4358 147.445 51.2906C149.483 47.0774 152.406 43.8835 156.211 41.709C160.016 39.4665 164.535 38.3452 169.768 38.3452C174.729 38.3452 179.078 39.4665 182.815 41.709C186.621 43.8835 189.577 47.0774 191.683 51.2906C193.858 55.4358 194.945 60.5324 194.945 66.5803ZM153.663 66.5803C153.663 70.8615 154.206 74.599 155.294 77.7928C156.449 80.9188 158.216 83.3311 160.594 85.03C162.972 86.7289 165.996 87.5783 169.666 87.5783C173.336 87.5783 176.36 86.7289 178.738 85.03C181.116 83.3311 182.849 80.9188 183.936 77.7928C185.092 74.599 185.669 70.8615 185.669 66.5803C185.669 62.2313 185.092 58.5277 183.936 55.4698C182.781 52.4118 181.014 50.0674 178.636 48.4365C176.326 46.7376 173.302 45.8882 169.564 45.8882C163.992 45.8882 159.948 47.723 157.434 51.3925C154.92 55.0621 153.663 60.1247 153.663 66.5803ZM231.077 38.3452C237.804 38.3452 243.207 40.6897 247.284 45.3785C251.429 50.0674 253.502 57.1347 253.502 66.5803C253.502 72.7642 252.55 77.9967 250.648 82.2778C248.813 86.491 246.197 89.6849 242.799 91.8594C239.469 93.966 235.528 95.0193 230.975 95.0193C228.189 95.0193 225.708 94.6456 223.534 93.8981C221.359 93.1506 219.49 92.1992 217.927 91.044C216.432 89.8208 215.141 88.4957 214.054 87.0686H213.443C213.578 88.2239 213.714 89.6849 213.85 91.4517C213.986 93.2185 214.054 94.7475 214.054 96.0386V118.464H205.084V39.3646H212.423L213.646 46.8056H214.054C215.141 45.2426 216.432 43.8156 217.927 42.5244C219.49 41.2333 221.325 40.214 223.432 39.4665C225.606 38.719 228.155 38.3452 231.077 38.3452ZM229.446 45.8882C225.776 45.8882 222.82 46.6017 220.578 48.0288C218.335 49.3879 216.704 51.4605 215.685 54.2466C214.666 57.0327 214.122 60.5664 214.054 64.8475V66.5803C214.054 71.0653 214.53 74.8708 215.481 77.9967C216.432 81.1226 218.029 83.501 220.272 85.1319C222.582 86.7628 225.708 87.5783 229.65 87.5783C232.979 87.5783 235.698 86.6609 237.804 84.8261C239.979 82.9914 241.576 80.511 242.595 77.3851C243.682 74.1913 244.226 70.5557 244.226 66.4784C244.226 60.2266 243.003 55.2319 240.556 51.4944C238.178 47.7569 234.474 45.8882 229.446 45.8882ZM272.689 39.3646V94H263.719V39.3646H272.689ZM268.306 18.8763C269.665 18.8763 270.854 19.352 271.873 20.3033C272.961 21.1867 273.504 22.6138 273.504 24.5844C273.504 26.4872 272.961 27.9142 271.873 28.8656C270.854 29.817 269.665 30.2926 268.306 30.2926C266.811 30.2926 265.554 29.817 264.534 28.8656C263.515 27.9142 263.005 26.4872 263.005 24.5844C263.005 22.6138 263.515 21.1867 264.534 20.3033C265.554 19.352 266.811 18.8763 268.306 18.8763ZM312.219 38.3452C318.743 38.3452 323.67 39.9422 326.999 43.136C330.329 46.2619 331.994 51.3585 331.994 58.4258V94H323.126V59.0374C323.126 54.6204 322.141 51.3246 320.17 49.15C318.199 46.9755 315.107 45.8882 310.894 45.8882C304.846 45.8882 300.667 47.5871 298.356 50.9848C296.046 54.3825 294.891 59.2752 294.891 65.663V94H285.921V39.3646H293.158L294.483 46.8056H294.993C296.216 44.9029 297.711 43.3399 299.478 42.1167C301.312 40.8256 303.317 39.8742 305.492 39.2626C307.666 38.651 309.909 38.3452 312.219 38.3452ZM343.529 88.4957C343.529 85.9814 344.141 84.2145 345.364 83.1952C346.587 82.1759 348.048 81.6663 349.747 81.6663C351.514 81.6663 353.009 82.1759 354.232 83.1952C355.523 84.2145 356.168 85.9814 356.168 88.4957C356.168 90.942 355.523 92.7089 354.232 93.7961C353.009 94.8834 351.514 95.427 349.747 95.427C348.048 95.427 346.587 94.8834 345.364 93.7961C344.141 92.7089 343.529 90.942 343.529 88.4957ZM386.297 87.6802C387.656 87.6802 389.049 87.5783 390.477 87.3744C391.904 87.1026 393.059 86.8308 393.942 86.559V93.3884C392.991 93.8641 391.632 94.2378 389.865 94.5097C388.098 94.8494 386.399 95.0193 384.768 95.0193C381.914 95.0193 379.264 94.5436 376.818 93.5923C374.439 92.573 372.503 90.8401 371.008 88.3938C369.513 85.9474 368.765 82.5157 368.765 78.0986V46.2959H361.018V42.0148L368.867 38.4472L372.435 26.8269H377.735V39.3646H393.534V46.2959H377.735V77.8948C377.735 81.2245 378.517 83.7049 380.079 85.3358C381.71 86.8988 383.783 87.6802 386.297 87.6802ZM421.905 38.3452C426.594 38.3452 430.603 39.3646 433.933 41.4032C437.331 43.4418 439.913 46.3299 441.68 50.0674C443.514 53.7369 444.432 58.0521 444.432 63.0127V68.4151H407.023C407.159 74.599 408.722 79.3218 411.712 82.5836C414.77 85.7775 419.017 87.3744 424.453 87.3744C427.919 87.3744 430.977 87.0686 433.627 86.457C436.345 85.7775 439.131 84.8261 441.986 83.603V91.4517C439.199 92.6749 436.447 93.5583 433.729 94.1019C431.011 94.7135 427.783 95.0193 424.046 95.0193C418.881 95.0193 414.294 93.966 410.285 91.8594C406.343 89.7528 403.251 86.6269 401.009 82.4817C398.834 78.2685 397.747 73.138 397.747 67.09C397.747 61.11 398.732 55.9794 400.703 51.6983C402.742 47.4172 405.562 44.1214 409.163 41.8109C412.833 39.5005 417.08 38.3452 421.905 38.3452ZM421.803 45.6843C417.522 45.6843 414.124 47.0774 411.61 49.8635C409.163 52.5817 407.702 56.3872 407.227 61.2799H435.054C435.054 58.154 434.578 55.4358 433.627 53.1254C432.676 50.8149 431.215 49.0141 429.244 47.723C427.341 46.3639 424.861 45.6843 421.803 45.6843ZM476.179 95.0193C471.354 95.0193 467.039 94.034 463.234 92.0633C459.496 90.0926 456.54 87.0347 454.365 82.8894C452.259 78.7442 451.206 73.4438 451.206 66.9881C451.206 60.2606 452.327 54.7902 454.569 50.5771C456.812 46.3639 459.836 43.2719 463.641 41.3013C467.515 39.3306 471.898 38.3452 476.79 38.3452C479.577 38.3452 482.261 38.651 484.843 39.2626C487.425 39.8063 489.532 40.4858 491.163 41.3013L488.411 48.7423C486.78 48.1307 484.877 47.5531 482.702 47.0094C480.528 46.4658 478.489 46.194 476.587 46.194C472.917 46.194 469.893 46.9755 467.515 48.5384C465.136 50.1014 463.369 52.4118 462.214 55.4698C461.059 58.5277 460.481 62.3332 460.481 66.8861C460.481 71.2352 461.059 74.9388 462.214 77.9967C463.369 81.0547 465.102 83.3651 467.413 84.9281C469.723 86.491 472.611 87.2725 476.077 87.2725C479.067 87.2725 481.683 86.9667 483.926 86.3551C486.236 85.7435 488.343 84.996 490.245 84.1126V92.0633C488.411 93.0147 486.372 93.7282 484.13 94.2039C481.955 94.7475 479.305 95.0193 476.179 95.0193ZM508.131 39.2626C508.131 40.5538 508.063 41.8789 507.927 43.238C507.859 44.5971 507.758 45.8202 507.622 46.9075H508.233C509.388 45.0048 510.849 43.4418 512.616 42.2187C514.383 40.9955 516.354 40.0781 518.528 39.4665C520.703 38.7869 522.945 38.4472 525.256 38.4472C529.673 38.4472 533.342 39.1607 536.264 40.5877C539.254 41.9468 541.497 44.0874 542.992 47.0094C544.487 49.9315 545.234 53.7369 545.234 58.4258V94H536.366V59.0374C536.366 54.6204 535.381 51.3246 533.41 49.15C531.44 46.9755 528.348 45.8882 524.135 45.8882C520.057 45.8882 516.863 46.6697 514.553 48.2326C512.243 49.7276 510.578 51.9701 509.558 54.9601C508.607 57.8822 508.131 61.4838 508.131 65.7649V94H499.161V16.5318H508.131V39.2626Z" fill="#1c1917"/>
+</svg></div>
+</main>
+<script>
+(function(){
+ var F=[["\ud83d\ude22","Very Bad"],["\ud83d\ude1e","Bad"],["\ud83d\ude10","Okay"],["\ud83d\ude0a","Good"],["\ud83e\udd29","Excellent"]];
+ var BAD=["Irrelevant Questions","Incorrect Questions","Exam terminated","Camera or mic problem","Couldn\u2019t run or submit","Page or timer froze","Internet or power","Other"];
+ var MID=["Instructions were unclear","Too little time","Questions too hard","Proctoring felt strict","Page was slow","Other"];
+ var GOOD=["Clear questions","Smooth experience","Fair time limit","Easy to navigate","Helpful instructions","Other"];
+ var $=function(i){return document.getElementById(i)},sel={},r=null;
+ $("rate").insertAdjacentHTML("beforeend",F.map(function(f,i){return '<label class="face"><input type="radio" name="r" value="'+i+'"><span class="em" aria-hidden="true">'+f[0]+'</span><span class="lb">'+f[1]+'</span></label>'}).join(""));
+ $("rate").addEventListener("change",function(e){var v=+e.target.value;var g=v<2?0:(v<3?1:2);if(r===null||g!==(r<2?0:(r<3?1:2))){sel={};var L=[BAD,MID,GOOD][g];$("whyL").textContent=["What went wrong?","What could be better?","What did you like?"][g];
+  $("chips").innerHTML=L.map(function(t){return '<button type="button" class="chip" aria-pressed="false">'+t+'</button>'}).join("");}
+  r=v;$("why").hidden=false;$("sub").disabled=false;});
+ $("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;var on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",on);});
+ $("note").addEventListener("input",function(){$("cn").textContent=this.value.length});
+ $("sub").addEventListener("click",function(){$("form").hidden=true;$("ok").hidden=false;$("ok").focus();});
+})();
+</script>
+</body></html>

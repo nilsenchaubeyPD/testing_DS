@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Config Portal</title><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}html,body{margin:0;height:100%}body{display:flex;flex-direction:column;background:#f5f5f4;font-family:Manrope,system-ui,sans-serif;font-size:14px;min-width:1024px}
+.sw{display:flex;align-items:center;gap:16px;padding:8px 16px;background:#1c1917;color:#fff;flex:none}
+.sw a.home{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#a8a29e;font-weight:700;text-decoration:none}.sw a.home:hover{color:#fff}
+.tabs{display:flex;gap:4px}.tabs button{font:inherit;font-weight:600;border:0;border-radius:8px;padding:6px 12px;background:transparent;color:#d6d3d1;cursor:pointer}
+.tabs button:hover{background:#292524}.tabs button[aria-selected=true]{background:#fff;color:#1c1917}
+.tabs button:focus-visible,.sw a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+iframe{flex:1;border:0;width:100%;background:#f5f5f4}</style></head><body>
+<div class="sw"><a class="home" href="index.html">Config Portal</a><div class="tabs" role="tablist" id="t"></div></div>
+<iframe id="f" title="Screen"></iframe>
+<script>var T=[["Assessment Details", ""], ["Statistics", "statistics"]],t=document.getElementById("t"),f=document.getElementById("f");
+function mark(i){[].forEach.call(t.children,function(b,k){b.setAttribute("aria-selected",k==i)})}
+function go(i){mark(i);try{f.contentWindow.location.hash=T[i][1]}catch(e){}}
+f.addEventListener("load",function(){try{var w=f.contentWindow;w.addEventListener("hashchange",function(){var h=w.location.hash.replace("#","");T.forEach(function(x,k){if(x[1]===h)mark(k)})})}catch(e){}});
+T.forEach(function(d,i){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.textContent=d[0];b.onclick=function(){go(i)};t.appendChild(b)});
+f.src="config/assessment-details.html";mark(0);</script></body></html>

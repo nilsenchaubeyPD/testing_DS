@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coding Test Screen</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--page:#f5f5f4;--bg-2:#fafaf9;--text-1:#1c1917;--text-2:#44403c;--text-3:#57534e;--text-4:#78716c;--fg-4:#a8a29e;--border-1:#d6d3d1;--border-2:#e7e5e4;
+--brand:#1c1917;--brand-700:#44403c;--brand-50:#f2f7f4;--brand-100:#c3d9cb;
+--ok:#12b76a;--ok-50:#ecfdf3;--ok-200:#abefc6;--ok-700:#067647;--warn-50:#fefce8;--warn-200:#fef08a;--warn-700:#a16207;--bad:#d92d20;--bad-50:#fef3f2;--bad-200:#fecdca;--bad-700:#b42318;
+--ed:#292524;--ed-gut:#1c1917;--ed-line:#292524;--ed-tx:#e7e5e4;
+--sh-btn:0 1px 2px rgba(0,0,0,.05),inset 0 -2px 0 rgba(0,0,0,.05),inset 0 0 0 1px rgba(0,0,0,.18);--ring:0 0 0 2px #fff,0 0 0 4px var(--brand-100);
+--font:"Manrope",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{background:var(--page);color:var(--text-1);font-family:var(--font);font-size:14px;line-height:20px;min-width:1024px;display:flex;flex-direction:column;overflow:hidden}
+button,select,textarea{font-family:inherit}button{cursor:pointer}
+svg.ic{display:block;flex:none}
+.grow{flex:1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* header (same as other Assessment Portal screens) */
+.top{height:64px;flex:none;background:var(--bg);border-bottom:1px solid var(--border-2);display:flex;align-items:center;justify-content:space-between;padding:0 32px}
+.brand{font-weight:800;font-size:20px;line-height:18px;letter-spacing:-.02em;color:#0b4a8f;display:flex;flex-direction:column}
+.tr{display:flex;align-items:center;gap:24px;color:var(--text-2);font-weight:500}
+.tr .it{display:inline-flex;align-items:center;gap:8px;background:none;border:0;color:inherit;padding:6px 4px;border-radius:8px;font-size:14px}
+.tr .it:hover{background:var(--bg-2)}.tr .good{color:var(--ok)}.tr .good b{color:var(--text-2);font-weight:500}
+/* sub bar */
+.sub{flex:none;background:var(--bg);padding:12px 32px 16px;border-bottom:1px solid var(--border-2)}
+.sub .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.sub .l{display:flex;align-items:center;gap:8px;min-width:0}
+.sub .r{display:flex;justify-content:flex-end}
+.ttlw{display:flex;flex-direction:column;gap:2px;margin-right:8px}
+.ttl{font-size:16px;line-height:24px;font-weight:600}
+.vdiv{width:1px;height:32px;background:var(--border-2);margin:0 8px}
+.lnk{display:inline-flex;align-items:center;gap:4px;background:none;border:0;padding:0;height:20px;color:var(--brand);font-weight:600;font-size:14px;line-height:20px;border-radius:6px}
+.lnk:hover{color:var(--brand-700)}
+.lnk.danger{color:var(--bad)}.lnk.danger:hover{color:var(--bad-700)}
+.timer{display:flex;align-items:center;gap:10px;color:var(--text-1)}
+.timer svg{width:28px;height:28px;color:var(--text-3)}
+.timer div{display:flex;flex-direction:column;align-items:center}
+.timer span{font-size:24px;line-height:32px;font-weight:600;font-variant-numeric:tabular-nums}
+.timer small{font-size:12px;line-height:18px;color:var(--text-4);font-weight:500}
+.timer.low span{color:var(--bad)}
+.bar{height:4px;margin-top:12px;border-radius:9999px;background:var(--border-2);overflow:hidden}
+.bar i{display:block;height:100%;width:76%;border-radius:9999px;background:var(--brand);transition:width 1s linear}
+/* Wavekit buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:44px;padding:10px 16px;border-radius:8px;font-size:16px;line-height:24px;font-weight:600;border:0;box-shadow:var(--sh-btn);white-space:nowrap}
+.btn.md{height:40px;padding:10px 14px;gap:4px;font-size:14px;line-height:20px}
+.btn.pri{background:var(--brand);color:#fff}.btn.pri:hover{background:var(--brand-700)}
+.btn.sec{background:var(--bg);color:var(--text-2);box-shadow:var(--sh-btn),inset 0 0 0 1px var(--border-1)}.btn.sec:hover{background:var(--bg-2);color:#292524}
+.btn.dang{background:var(--bad);color:#fff}.btn.dang:hover{background:var(--bad-700)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.ib{width:40px;height:40px;display:inline-grid;place-items:center;border-radius:8px;border:0;background:#fff;color:var(--text-3);box-shadow:var(--sh-btn),inset 0 0 0 1px var(--border-1)}
+.ib:hover{background:var(--bg-2);color:var(--text-1)}
+.ib:disabled{opacity:.45;cursor:not-allowed}
+.ib.ghost{width:36px;height:36px;box-shadow:none;background:none;color:var(--text-4)}
+.ib.ghost:hover{background:var(--bg-2);color:var(--text-2)}
+.ib.ghost[aria-pressed="true"]{background:var(--brand-50);color:var(--brand)}
+.btn:focus-visible,.ib:focus-visible,.lnk:focus-visible,.tab:focus-visible,.tch:focus-visible,.menu li:focus-visible,.tr .it:focus-visible,.case:focus-visible,.seg button:focus-visible,.rail:focus-visible{outline:0;box-shadow:var(--ring)}
+.badge{display:inline-flex;align-items:center;height:22px;padding:2px 8px;border-radius:9999px;border:1px solid var(--border-2);background:var(--bg-2);color:var(--text-2);font-size:12px;line-height:18px;font-weight:500}
+.badge.ok{background:var(--ok-50);border-color:var(--ok-200);color:var(--ok-700)}
+.badge.bad{background:var(--bad-50);border-color:var(--bad-200);color:var(--bad-700)}
+.badge.wn{background:var(--warn-50);border-color:var(--warn-200);color:var(--warn-700)}
+.badge.br{background:var(--brand-50);border-color:var(--brand-100);color:var(--brand-700)}
+kbd.k{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:2px 6px;border-radius:6px;border:1px solid var(--border-2);background:var(--bg-2);color:var(--text-3);font:500 12px/18px var(--font)}
+/* problems menu */
+.plw{position:relative}
+.menu{position:absolute;top:calc(100% + 4px);left:0;z-index:25;min-width:280px;margin:0;padding:4px;list-style:none;background:#fff;border:1px solid var(--border-2);border-radius:8px;box-shadow:0 12px 16px -4px rgba(10,13,18,.08),0 4px 6px -2px rgba(10,13,18,.03)}
+.menu li{display:flex;align-items:center;gap:8px;padding:10px 10px;border-radius:6px;cursor:pointer;color:var(--text-2);font-weight:500}
+.menu li:hover{background:var(--bg-2)}
+.menu li[aria-selected="true"]{background:var(--brand-50);color:var(--brand-700)}
+.menu li .badge{margin-left:auto}
+/* workspace: edge to edge, panes split by 1px dividers that can be dragged */
+.ws{flex:1;min-height:0;display:flex;padding:8px;background:var(--page);--lw:40%}
+.pane{background:var(--bg);border:1px solid var(--border-2);border-radius:12px;display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden}
+.left{flex:0 0 var(--lw)}
+.rightcol{flex:1;display:flex;flex-direction:column;min-width:0;min-height:0;--ch:240px}
+.ws.lcol .left{flex:0 0 48px}
+.rightcol.cclosed #rzY{display:block;pointer-events:none}
+.ws.emax .left,.ws.emax #rzX{display:none}
+.ws.lmax .rightcol,.ws.lmax #rzX{display:none}.ws.lmax .left{flex:1}
+.phd{display:flex;align-items:center;gap:4px;padding:0 12px 0 16px;height:52px;border-bottom:1px solid var(--border-2);flex:none}
+/* 8px gutters between the three cards; they are drag handles too */
+.rz{position:relative;flex:none;background:transparent;z-index:5;outline:0}
+.rz::after{content:"";position:absolute;border-radius:9999px;background:transparent;transition:background .12s}
+.rz.v{width:8px;cursor:col-resize}.rz.v::after{top:50%;left:3px;width:2px;height:40px;margin-top:-20px}
+.rz.h{height:8px;cursor:row-resize}.rz.h::after{left:50%;top:3px;height:2px;width:40px;margin-left:-20px}
+.rz:hover::after,.rz.drag::after,.rz:focus-visible::after{background:var(--brand)}
+.rz.v:hover::after,.rz.v.drag::after,.rz.v:focus-visible::after{top:0;height:100%;margin-top:0}
+.rz.h:hover::after,.rz.h.drag::after,.rz.h:focus-visible::after{left:0;width:100%;margin-left:0}
+body.dragging{user-select:none}body.dragging.col{cursor:col-resize}body.dragging.row{cursor:row-resize}
+.left{position:relative}
+.tabs{display:flex;gap:16px;align-self:stretch}
+.tab svg{width:20px;height:20px}
+.tab{display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:0 4px;color:var(--text-4);font-size:14px;font-weight:600;border-bottom:2px solid transparent;margin-bottom:-1px;border-radius:0}
+.tab:hover{color:var(--text-2)}
+.tab[aria-selected="true"]{color:var(--brand);border-bottom-color:var(--brand)}
+.pbody{flex:1;overflow:auto;padding:20px 24px 24px}
+.crumb{font-size:14px;font-weight:600;color:var(--brand);margin:0}
+.pbody h1{margin:8px 0 12px;font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.01em}
+.meta{display:flex;gap:8px;margin-bottom:16px}
+.pbody p{margin:0;color:var(--text-3);font-size:15px;line-height:24px}
+.pbody h2{margin:0 0 12px;font-size:16px;line-height:24px;font-weight:600}
+.blk{padding:20px 0;border-top:1px solid var(--border-2)}
+.blk:first-of-type{border-top:0}
+.pbody ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:10px;color:var(--text-3);font-size:15px;line-height:24px}
+code.c{font-family:var(--mono);font-size:13px;background:var(--bg-2);border:1px solid var(--border-2);border-radius:6px;padding:1px 6px;color:var(--text-1)}
+pre.ex{margin:8px 0 0;padding:12px 14px;background:var(--bg-2);border:1px solid var(--border-2);border-radius:8px;font:13px/20px var(--mono);color:var(--text-1);white-space:pre-wrap}
+.exl{font-size:14px;font-weight:600;color:var(--text-2);margin-top:12px}
+.rail{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;height:100%;border:0;background:var(--bg);color:var(--text-3);padding:16px 0;font-weight:600}
+.rail span{writing-mode:vertical-rl;transform:rotate(180deg)}
+.rail:hover{background:var(--bg-2)}
+.ws.lcol .left .phd,.ws.lcol .left .pbody{display:none}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:48px 16px;color:var(--text-3)}
+.empty b{color:var(--text-1);font-size:16px}
+.subs{width:100%;border-collapse:collapse;font-size:14px}
+.subs th{text-align:left;font-size:12px;color:var(--text-4);font-weight:600;padding:8px 8px;border-bottom:1px solid var(--border-2);background:var(--bg-2)}
+.subs td{padding:12px 8px;border-bottom:1px solid var(--border-2);color:var(--text-2)}
+/* editor */
+.ed{flex:1}
+.sel{position:relative;display:inline-flex;align-items:center}
+.sel select{appearance:none;-webkit-appearance:none;height:36px;padding:6px 32px 6px 12px;border:1px solid var(--border-1);border-radius:8px;background:#fff;color:var(--text-1);font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.sel select:focus-visible{outline:0;border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-100)}
+.sel svg{position:absolute;right:8px;pointer-events:none;color:var(--text-4)}
+.saved{margin-left:12px;color:var(--text-4);font-weight:500;display:inline-flex;align-items:center;gap:6px}
+.saved::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.saved.dirty::before{background:var(--warn-200)}
+.tipw{position:relative;display:inline-flex}
+.tip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1c1917;color:#fff;font-size:12px;line-height:18px;font-weight:600;padding:4px 8px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s;z-index:30}
+.tipw:hover .tip,.tipw:focus-within .tip{opacity:1}
+.tipw:has(.pop:not([hidden])) .tip{opacity:0}
+.pop{position:absolute;top:calc(100% + 6px);right:0;z-index:25;background:#fff;border:1px solid var(--border-2);border-radius:8px;padding:12px;box-shadow:0 12px 16px -4px rgba(10,13,18,.08);display:flex;flex-direction:column;gap:8px;min-width:180px}
+.pop .lab{font-size:12px;font-weight:600;color:var(--text-3)}
+.seg{display:flex;border:1px solid var(--border-1);border-radius:8px;overflow:hidden}
+.seg button{flex:1;height:32px;border:0;background:#fff;color:var(--text-2);font-weight:600;border-left:1px solid var(--border-1)}
+.seg button:first-child{border-left:0}
+.seg button[aria-pressed="true"]{background:var(--bg-2);color:var(--text-1)}
+.code{flex:1;min-height:0;display:flex;background:var(--ed);overflow:hidden;--fs:14px;--lh:22px}
+.gut{flex:none;min-width:52px;padding:12px 12px 12px 0;background:var(--ed-gut);color:#78716c;font:var(--fs)/var(--lh) var(--mono);text-align:right;overflow:hidden;user-select:none;white-space:pre}
+.gut b{color:#e7e5e4;font-weight:400}
+.code textarea{flex:1;border:0;resize:none;outline:0;padding:12px 16px;background:var(--ed);color:var(--ed-tx);caret-color:#fff;font:var(--fs)/var(--lh) var(--mono);tab-size:4;white-space:pre;overflow:auto}
+.code:focus-within{box-shadow:inset 0 0 0 2px var(--brand)}
+.code textarea::selection{background:#1c191766}
+.kh{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text-4);margin-right:8px}
+/* console */
+.tc{flex:0 0 var(--ch)}
+.tc.closed{flex:0 0 52px}.tc.closed .phd{border-bottom:0}
+.tc .phd{gap:8px}
+.tc.closed #tcTog svg{transform:rotate(180deg)}
+.tcb{flex:1;overflow:auto;padding:16px}
+.cases{display:flex;gap:8px;margin-bottom:12px}
+.case{display:inline-flex;align-items:center;gap:6px;height:32px;padding:6px 12px;border-radius:8px;border:1px solid var(--border-2);background:#fff;color:var(--text-2);font-weight:600}
+.case[aria-pressed="true"]{background:var(--bg-2);border-color:var(--border-1);color:var(--text-1)}
+.case i{width:8px;height:8px;border-radius:50%;background:var(--fg-4)}
+.case i.ok{background:var(--ok)}.case i.bad{background:var(--bad)}
+.io{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.io.two{grid-template-columns:1fr 1fr}
+.io .lab{font-size:12px;font-weight:600;color:var(--text-3);margin-bottom:6px}
+.io pre{margin:0;padding:10px 12px;min-height:44px;background:var(--bg-2);border:1px solid var(--border-2);border-radius:8px;font:13px/20px var(--mono);white-space:pre-wrap;color:var(--text-1)}
+.io pre.bad{background:var(--bad-50);border-color:var(--bad-200);color:var(--bad-700)}
+.io pre.ok{background:var(--ok-50);border-color:var(--ok-200);color:var(--ok-700)}
+.runmsg{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-weight:600}
+.runmsg.ok{color:var(--ok-700)}.runmsg.bad{color:var(--bad-700)}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--brand-100);border-top-color:var(--brand);animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* watermark (candidate ID, proctoring) */
+.wm{position:fixed;inset:0;pointer-events:none;z-index:15;font:500 15px/1 var(--font);color:rgba(115,115,115,.12)}
+.wm span{position:absolute}
+.wm span:nth-child(1){top:32%;left:14%}.wm span:nth-child(2){top:44%;left:58%}.wm span:nth-child(3){top:56%;left:80%}.wm span:nth-child(4){top:70%;left:46%}.wm span:nth-child(5){top:82%;left:18%}.wm span:nth-child(6){top:72%;left:88%}
+/* dialogs, toast */
+.ov{position:fixed;inset:0;background:rgba(23,23,23,.4);display:flex;align-items:center;justify-content:center;z-index:40;padding:16px}
+.dlg{width:min(480px,100%);background:#fff;border-radius:12px;padding:24px;box-shadow:0 20px 24px -4px rgba(10,13,18,.08),0 8px 8px -4px rgba(10,13,18,.03)}
+.dlg h3{margin:0 0 8px;font-size:18px;line-height:28px;font-weight:600}
+.dlg p,.dlg li{margin:0;color:var(--text-3)}.dlg ul{margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.dlg .row{display:flex;justify-content:flex-end;gap:12px;margin-top:24px}
+.toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:var(--text-1);color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;box-shadow:0 8px 20px rgba(10,13,18,.2);z-index:50}
+
+/* Sage & Ink: sage accent for progress and focus */
+.bar i,.credits .meter i,.prog i{background:#6e9a7c!important}
+</style></head><body>
+<header class="top">
+  <div class="brand" aria-label="NxtWave"><span>NXT</span><span>WAVE</span></div>
+  <div class="tr"><button class="it" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4m0 4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Z"/></svg>Report</button><span class="it good"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19.5h.01M22.806 8.7A15.942 15.942 0 0 0 12 4.5c-4.166 0-7.96 1.592-10.807 4.2m3.539 3.543A10.958 10.958 0 0 1 12 9.5a10.96 10.96 0 0 1 7.268 2.743m-3.57 3.532A5.974 5.974 0 0 0 12 14.5c-1.416 0-2.718.49-3.745 1.312"/></svg><b>Excellent</b></span><button class="it" type="button">Isaac <svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button></div>
+</header>
+<div class="sub"><div class="row">
+  <div class="l">
+    <button class="ib ghost" id="back" type="button" aria-label="Back to sections"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m0 0 7 7m-7-7 7-7"/></svg></button>
+    <div class="ttlw"><div class="ttl">Coding Test</div><button class="lnk" id="ins" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16v-4m0-4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Z"/></svg>Instructions</button></div>
+    <span class="vdiv" aria-hidden="true"></span>
+    <div class="plw">
+      <button class="btn sec md" id="plBtn" type="button" aria-haspopup="listbox" aria-expanded="false"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12H9m12-6H9m12 12H9m-4-6a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm0-6a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm0 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg><span id="plLbl">Problem 1 of 3</span><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+      <ul class="menu" id="plMenu" role="listbox" aria-label="Problems" hidden></ul>
+    </div>
+    <button class="ib" id="prevP" type="button" aria-label="Previous problem"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+    <button class="ib" id="nextP" type="button" aria-label="Next problem"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+  </div>
+  <div class="timer" role="timer" aria-label="Time left"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6v6l4 2m6-2c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Z"/></svg><div><span id="tm">22 : 54</span><small>Time left</small></div></div>
+  <div class="r"><button class="lnk danger" id="quit" type="button"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 9-6 6m0-6 6 6m7-3c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Z"/></svg>Quit Assessment</button></div>
+</div>
+<div class="bar" role="progressbar" aria-label="Time left" aria-valuemin="0" aria-valuemax="100" aria-valuenow="76"><i id="prog"></i></div>
+</div>
+
+<div class="ws" id="ws">
+  <section class="pane left" id="left" aria-label="Problem">
+    <div class="phd">
+      <div class="tabs" role="tablist" aria-label="Problem views">
+        <button class="tab" role="tab" id="tDesc" aria-selected="true" aria-controls="pDesc"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.27V6.4c0 .56 0 .84.109 1.054a1 1 0 0 0 .437.437c.214.11.494.11 1.054.11h4.13M16 13H8m8 4H8m2-8H8m6-7H8.8c-1.68 0-2.52 0-3.162.327a3 3 0 0 0-1.311 1.311C4 4.28 4 5.12 4 6.8v10.4c0 1.68 0 2.52.327 3.162a3 3 0 0 0 1.311 1.311C6.28 22 7.12 22 8.8 22h6.4c1.68 0 2.52 0 3.162-.327a3 3 0 0 0 1.311-1.311C20 19.72 20 18.88 20 17.2V8l-6-6Z"/></svg>Description</button>
+        <button class="tab" role="tab" id="tSub" aria-selected="false" aria-controls="pSub" tabindex="-1"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22.7 13.5-2-2-2 2M21 12a9 9 0 1 1-1.245-4.57M12 7v5l3 2"/></svg>Submissions <span class="badge" id="subCount">0</span></button>
+      </div>
+      <span class="grow"></span>
+      <span class="tipw"><button class="ib ghost" id="maxL" type="button" aria-label="Expand description" aria-pressed="false"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 8 5-5m0 0h-5m5 0v5M8 8 3 3m0 0v5m0-5h5m0 13-5 5m0 0h5m-5 0v-5m13 0 5 5m0 0v-5m0 5h-5"/></svg></button><span class="tip" role="tooltip">Expand</span></span>
+      <span class="tipw"><button class="ib ghost" id="colL" type="button" aria-label="Collapse description"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v18M7.8 3h8.4c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.311 1.311C21 5.28 21 6.12 21 7.8v8.4c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C18.72 21 17.88 21 16.2 21H7.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C3 18.72 3 17.88 3 16.2V7.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.311-1.311C5.28 3 6.12 3 7.8 3Z"/></svg></button><span class="tip" role="tooltip">Collapse</span></span>
+    </div>
+    <div class="pbody" id="pDesc" role="tabpanel" aria-labelledby="tDesc"></div>
+    <div class="pbody" id="pSub" role="tabpanel" aria-labelledby="tSub" hidden></div>
+    <button class="rail" id="openL" type="button" aria-label="Show description" hidden><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v18M7.8 3h8.4c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.311 1.311C21 5.28 21 6.12 21 7.8v8.4c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C18.72 21 17.88 21 16.2 21H7.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C3 18.72 3 17.88 3 16.2V7.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.311-1.311C5.28 3 6.12 3 7.8 3Z"/></svg><span>Description</span></button>
+  </section>
+  <div class="rz v" id="rzX" role="separator" aria-orientation="vertical" aria-label="Resize problem and editor" tabindex="0" aria-valuemin="25" aria-valuemax="65" aria-valuenow="40"></div>
+  <div class="rightcol" id="rightcol">
+    <section class="pane ed" aria-label="Code editor">
+      <div class="phd">
+        <div class="sel"><label class="sr" for="lang">Language</label>
+          <select id="lang"><option>Python 3.9</option><option>Java 17</option><option>C++ 17</option><option>JavaScript (Node 18)</option></select><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+        <span class="saved" id="saved" aria-live="polite">Saved 6 minutes ago</span>
+        <span class="grow"></span>
+        <span class="tipw"><button class="ib ghost" id="sv" type="button" aria-label="Save code" aria-keyshortcuts="Control+S"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3.4c0 .56 0 .84.109 1.054a1 1 0 0 0 .437.437C7.76 8 8.04 8 8.6 8h6.8c.56 0 .84 0 1.054-.109a1 1 0 0 0 .437-.437C17 7.24 17 6.96 17 6.4V4m0 17v-6.4c0-.56 0-.84-.109-1.054a1 1 0 0 0-.437-.437C16.24 13 15.96 13 15.4 13H8.6c-.56 0-.84 0-1.054.109a1 1 0 0 0-.437.437C7 13.76 7 14.04 7 14.6V21M21 9.325V16.2c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C18.72 21 17.88 21 16.2 21H7.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C3 18.72 3 17.88 3 16.2V7.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.311-1.311C5.28 3 6.12 3 7.8 3h6.875c.489 0 .733 0 .963.055.204.05.4.13.579.24.201.123.374.296.72.642l3.126 3.126c.346.346.519.519.642.72.11.18.19.374.24.579.055.23.055.474.055.963Z"/></svg></button><span class="tip" role="tooltip">Save</span></span>
+        <span class="tipw"><button class="ib ghost" id="fs" type="button" aria-label="Editor settings" aria-haspopup="true" aria-expanded="false"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M18.727 14.727a1.5 1.5 0 0 0 .3 1.655l.055.054a1.816 1.816 0 0 1 0 2.573 1.818 1.818 0 0 1-2.573 0l-.055-.055a1.5 1.5 0 0 0-1.654-.3 1.5 1.5 0 0 0-.91 1.373v.155a1.818 1.818 0 1 1-3.636 0V20.1a1.5 1.5 0 0 0-.981-1.373 1.5 1.5 0 0 0-1.655.3l-.054.055a1.818 1.818 0 0 1-3.106-1.287 1.818 1.818 0 0 1 .533-1.286l.054-.055a1.5 1.5 0 0 0 .3-1.654 1.5 1.5 0 0 0-1.372-.91h-.155a1.818 1.818 0 1 1 0-3.636H3.9a1.5 1.5 0 0 0 1.373-.981 1.5 1.5 0 0 0-.3-1.655l-.055-.054A1.818 1.818 0 1 1 7.491 4.99l.054.054a1.5 1.5 0 0 0 1.655.3h.073a1.5 1.5 0 0 0 .909-1.372v-.155a1.818 1.818 0 0 1 3.636 0V3.9a1.499 1.499 0 0 0 .91 1.373 1.5 1.5 0 0 0 1.654-.3l.054-.055a1.817 1.817 0 0 1 2.573 0 1.819 1.819 0 0 1 0 2.573l-.055.054a1.5 1.5 0 0 0-.3 1.655v.073a1.5 1.5 0 0 0 1.373.909h.155a1.818 1.818 0 0 1 0 3.636H20.1a1.499 1.499 0 0 0-1.373.91Z"/></svg></button><span class="tip" role="tooltip">Settings</span>
+          <div class="pop" id="fsPop" hidden><span class="lab">Font size</span><div class="seg" role="group" aria-label="Font size"><button type="button" data-fs="13">13</button><button type="button" data-fs="14" aria-pressed="true">14</button><button type="button" data-fs="16">16</button></div></div></span>
+        <span class="tipw"><button class="ib ghost" id="rs" type="button" aria-label="Reset code"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10s2.005-2.732 3.634-4.362A9 9 0 1 1 12 21a9.004 9.004 0 0 1-8.648-6.5M2 10V4m0 6h6"/></svg></button><span class="tip" role="tooltip">Reset code</span></span>
+        <span class="tipw"><button class="ib ghost" id="maxE" type="button" aria-label="Expand editor" aria-pressed="false"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 8 5-5m0 0h-5m5 0v5M8 8 3 3m0 0v5m0-5h5m0 13-5 5m0 0h5m-5 0v-5m13 0 5 5m0 0v-5m0 5h-5"/></svg></button><span class="tip" role="tooltip">Expand</span></span>
+      </div>
+      <div class="code" id="code">
+        <div class="gut" id="gut" aria-hidden="true"></div>
+        <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Code editor"></textarea>
+      </div>
+    </section>
+    <div class="rz h" id="rzY" role="separator" aria-orientation="horizontal" aria-label="Resize editor and console" tabindex="0"></div>
+    <section class="pane tc" id="tc" aria-label="Console">
+      <div class="phd">
+        <div class="tabs" role="tablist" aria-label="Console">
+          <button class="tab" role="tab" id="tCase" aria-selected="true" aria-controls="cBody"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 12 3 3 6-6M7.8 21h8.4c1.68 0 2.52 0 3.162-.327a3 3 0 0 0 1.311-1.311C21 18.72 21 17.88 21 16.2V7.8c0-1.68 0-2.52-.327-3.162a3 3 0 0 0-1.311-1.311C18.72 3 17.88 3 16.2 3H7.8c-1.68 0-2.52 0-3.162.327a3 3 0 0 0-1.311 1.311C3 5.28 3 6.12 3 7.8v8.4c0 1.68 0 2.52.327 3.162a3 3 0 0 0 1.311 1.311C5.28 21 6.12 21 7.8 21Z"/></svg>Test cases</button>
+          <button class="tab" role="tab" id="tRes" aria-selected="false" aria-controls="cBody" tabindex="-1"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 17 6-6-6-6m8 14h8"/></svg>Test result <span class="badge" id="tcSt" hidden></span></button>
+        </div>
+        <span class="grow"></span>
+        <span class="kh" aria-hidden="true"><kbd class="k">Ctrl</kbd>+<kbd class="k">Enter</kbd> run</span>
+        <button class="btn sec md" id="run" type="button" aria-keyshortcuts="Control+Enter"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.99c0-.972 0-1.457.202-1.725a1 1 0 0 1 .738-.395c.335-.02.74.25 1.548.788l10.515 7.01c.668.446 1.002.668 1.118.949a1 1 0 0 1 0 .766c-.116.28-.45.503-1.118.948l-10.515 7.01c-.809.54-1.213.809-1.548.789a1 1 0 0 1-.738-.395C5 20.467 5 19.98 5 19.01V4.99Z"/></svg>Run</button>
+        <button class="btn pri md" id="submit" type="button">Submit</button>
+        <span class="tipw"><button class="ib ghost" id="tcTog" type="button" aria-label="Collapse console" aria-expanded="true" aria-controls="cBody"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><span class="tip" role="tooltip" id="tcTip">Collapse</span></span>
+      </div>
+      <div class="tcb" id="cBody" role="tabpanel"></div>
+    </section>
+  </div>
+</div>
+<div class="wm" aria-hidden="true"><span>0aa04c</span><span>0aa04c</span><span>0aa04c</span><span>0aa04c</span><span>0aa04c</span><span>0aa04c</span></div>
+
+<div class="ov" id="ovI" hidden><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="iT"><h3 id="iT">Instructions</h3>
+  <ul><li>Solve each problem in the language of your choice.</li><li>Run checks your code against the sample test cases only.</li><li>Submit runs all hidden test cases. Your last submission is scored.</li><li>Your code is saved automatically every 30 seconds.</li><li>Use <b>Ctrl + Enter</b> to run your code.</li></ul>
+  <div class="row"><button class="btn pri md" id="iC" type="button">Got it</button></div></div></div>
+<div class="ov" id="ovS" hidden><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="sT"><h3 id="sT">Submit this solution?</h3><p>Your code will be checked against all test cases. You can submit again before time runs out.</p>
+  <div class="row"><button class="btn sec md" id="sN" type="button">Cancel</button><button class="btn pri md" id="sY" type="button">Submit</button></div></div></div>
+<div class="ov" id="ovR" hidden><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="rT"><h3 id="rT">Reset your code?</h3><p>This replaces your code with the starter template. This can&rsquo;t be undone.</p>
+  <div class="row"><button class="btn sec md" id="rN" type="button">Cancel</button><button class="btn dang md" id="rY" type="button">Reset code</button></div></div></div>
+<div class="ov" id="ovQ" hidden><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="qT"><h3 id="qT">Quit the assessment?</h3><p>You won&rsquo;t be able to return. Your latest submission for each problem will be scored.</p>
+  <div class="row"><button class="btn sec md" id="qN" type="button">Keep going</button><button class="btn dang md" id="qY" type="button">Quit Assessment</button></div></div></div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script>
+(function(){
+ var $=function(id){return document.getElementById(id)};
+ function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+ var PR=[
+  {t:"Treasure Hunting Game Challenge",d:"Medium",m:20,
+   desc:"In a mystical treasure map, you are given an array of gold values representing different treasure locations. Your mission is to find two distinct treasure locations whose gold values sum exactly to a target total gold amount.",
+   inp:[["n","Size of <code class=\"c\">treasure_map</code>"],["treasure_map","A list of integers representing gold values at different locations (sorted)"],["total_gold","The target total gold amount to find"]],
+   out:"Two space-separated integers representing two indices where the corresponding gold values sum to <code class=\"c\">total_gold</code>, in increasing order.",
+   cases:[["5\n1 3 4 6 9\n10","1 3"],["4\n2 5 7 11\n9","0 2"],["3\n1 2 3\n5","1 2"]]},
+  {t:"Lantern Path",d:"Easy",m:10,
+   desc:"A row of lanterns is either lit (1) or unlit (0). Find the length of the longest run of consecutive lit lanterns.",
+   inp:[["n","Number of lanterns"],["lanterns","n space-separated values, each 0 or 1"]],
+   out:"A single integer: the longest run of consecutive 1s.",
+   cases:[["6\n1 1 0 1 1 1","3"],["4\n0 0 0 0","0"]]},
+  {t:"Balanced Scrolls",d:"Hard",m:30,
+   desc:"An ancient scroll contains only the characters ( ) [ ] { }. Decide whether every bracket is closed in the correct order.",
+   inp:[["s","A single string of brackets, length up to 10⁵"]],
+   out:"Print <code class=\"c\">YES</code> if the scroll is balanced, otherwise <code class=\"c\">NO</code>.",
+   cases:[["{[()]}","YES"],["([)]","NO"],["((","NO"]]}
+ ];
+ var LANG={"Python 3.9":"# Write your code here\n","Java 17":"import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        // Write your code here\n    }\n}\n","C++ 17":"#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}\n","JavaScript (Node 18)":"// Write your code here\n"};
+ var cur=0,code={},subs=[],caseIx=0,lastRun=null,escMode=false,savedAt=Date.now()-6*60000,dirty=false;
+ var src=$("src"),gut=$("gut"),lang=$("lang");
+ function key(){return cur+"|"+lang.value}
+ function getCode(){return code[key()]!==undefined?code[key()]:LANG[lang.value]}
+ function isStarter(c){return c.replace(/\s+/g,"")===LANG[lang.value].replace(/\s+/g,"")}
+
+ /* problem */
+ function renderProblem(){var p=PR[cur];
+  var h='<p class="crumb">Problem '+(cur+1)+' of '+PR.length+'</p><h1>'+esc(p.t)+'</h1>';
+  h+='<div class="meta"><span class="badge '+(p.d==="Easy"?"ok":p.d==="Hard"?"bad":"wn")+'">'+p.d+'</span><span class="badge">'+p.m+' marks</span></div>';
+  h+='<div class="blk"><p>'+esc(p.desc)+'</p></div>';
+  h+='<div class="blk"><h2>Input Format</h2><ul>'+p.inp.map(function(i){return '<li><code class="c">'+esc(i[0])+'</code> : '+i[1]+'</li>'}).join("")+'</ul></div>';
+  h+='<div class="blk"><h2>Output Format</h2><ul><li>'+p.out+'</li></ul></div>';
+  h+='<div class="blk"><h2>Example</h2><div class="exl">Input</div><pre class="ex">'+esc(p.cases[0][0])+'</pre><div class="exl">Output</div><pre class="ex">'+esc(p.cases[0][1])+'</pre></div>';
+  $("pDesc").innerHTML=h;$("pDesc").scrollTop=0;
+  $("plLbl").textContent="Problem "+(cur+1)+" of "+PR.length;
+  $("prevP").disabled=cur===0;$("nextP").disabled=cur===PR.length-1;
+  renderSubs();lastRun=null;caseIx=0;renderCases();loadCode();
+ }
+ function renderSubs(){var s=subs.filter(function(x){return x.p===cur});$("subCount").textContent=s.length;
+  $("pSub").innerHTML=s.length?'<table class="subs"><thead><tr><th>#</th><th>Status</th><th>Tests</th><th>Language</th><th>Time</th></tr></thead><tbody>'+s.slice().reverse().map(function(x,i){return '<tr><td>'+(s.length-i)+'</td><td><span class="badge '+(x.ok?"ok":"bad")+'">'+(x.ok?"Accepted":"Wrong answer")+'</span></td><td>'+x.pass+'/'+x.tot+'</td><td>'+esc(x.l)+'</td><td>'+x.at+'</td></tr>'}).join("")+'</tbody></table>'
+   :'<div class="empty"><b>No submissions yet</b><span>Your submissions for this problem will show up here.</span></div>';}
+
+ /* editor */
+ function lines(){var n=src.value.split("\n").length,ln=src.value.slice(0,src.selectionStart).split("\n").length,o="";for(var i=1;i<=n;i++)o+=(i===ln?"<b>"+i+"</b>":i)+"\n";gut.innerHTML=o;gut.scrollTop=src.scrollTop;}
+ function loadCode(){src.value=getCode();lines();}
+ function markDirty(){dirty=true;$("saved").textContent="Unsaved changes";$("saved").classList.add("dirty");}
+ function save(silent){code[key()]=src.value;dirty=false;savedAt=Date.now();updSaved();if(!silent)say("Code saved");}
+ function updSaved(){if(dirty)return;var m=Math.floor((Date.now()-savedAt)/60000);$("saved").classList.remove("dirty");$("saved").textContent=m<1?"Saved just now":"Saved "+m+" minute"+(m>1?"s":"")+" ago";}
+ src.addEventListener("input",function(){code[key()]=src.value;markDirty();lines();});
+ src.addEventListener("scroll",function(){gut.scrollTop=src.scrollTop});
+ ["click","keyup"].forEach(function(e){src.addEventListener(e,lines)});
+ src.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){escMode=true;return;}
+  if(e.key==="Tab"&&!escMode){e.preventDefault();var s=src.selectionStart,en=src.selectionEnd;src.setRangeText("    ",s,en,"end");code[key()]=src.value;markDirty();lines();return;}
+  if(e.key==="Enter"&&!(e.ctrlKey||e.metaKey)){var s2=src.selectionStart,line=src.value.slice(0,s2).split("\n").pop(),ind=(line.match(/^\s*/)||[""])[0];if(/[:{(\[]\s*$/.test(line))ind+="    ";e.preventDefault();src.setRangeText("\n"+ind,s2,src.selectionEnd,"end");code[key()]=src.value;markDirty();lines();}
+  escMode=false;
+ });
+ setInterval(function(){if(dirty)save(true);else updSaved();},30000);
+ lang.addEventListener("change",function(){loadCode();say("Switched to "+lang.value);});
+
+ /* run */
+ function judge(c){if(isStarter(c))return "empty";return /print|return|console\.log|cout|System\.out/.test(c)?"pass":"fail";}
+ var cTab="case",running=false;
+ function run(){var c=src.value;openTC(true);$("tcSt").hidden=true;running=true;selC("res");$("run").disabled=true;
+  setTimeout(function(){var jd=judge(c),p=PR[cur];running=false;
+   lastRun=p.cases.map(function(cs){return {got:jd==="pass"?cs[1]:(jd==="empty"?"":"(no output)"),ok:jd==="pass"}});
+   var n=lastRun.filter(function(r){return r.ok}).length;$("tcSt").hidden=false;$("tcSt").className="badge "+(n===lastRun.length?"ok":"bad");$("tcSt").textContent=n+"/"+lastRun.length;
+   $("run").disabled=false;renderCases();save(true);},900);}
+ function renderCases(){var p=PR[cur],c=p.cases[caseIx],r=lastRun&&lastRun[caseIx],B=$("cBody");
+  if(cTab==="res"&&running){B.innerHTML='<div class="runmsg"><span class="spin" aria-hidden="true"></span>Running sample test cases&hellip;</div>';return;}
+  if(cTab==="res"&&!lastRun){B.innerHTML='<div class="empty"><b>No results yet</b><span>Run your code to see the output for each test case.</span></div>';return;}
+  var chips='<div class="cases" role="group" aria-label="Test cases">'+p.cases.map(function(cs,i){var rr=cTab==="res"&&lastRun&&lastRun[i];return '<button type="button" class="case" aria-pressed="'+(i===caseIx)+'" data-i="'+i+'">'+(rr?'<i class="'+(rr.ok?"ok":"bad")+'"></i>':'')+'Case '+(i+1)+'</button>'}).join("")+'</div>';
+  if(cTab==="case"){B.innerHTML=chips+'<div class="io two"><div><div class="lab">Input</div><pre>'+esc(c[0])+'</pre></div><div><div class="lab">Expected output</div><pre>'+esc(c[1])+'</pre></div></div>';return;}
+  var all=lastRun.every(function(x){return x.ok});
+  var msg='<div class="runmsg '+(all?"ok":"bad")+'">'+(all?"Accepted. All sample test cases passed.":(r&&r.got===""?"No output. Your code still has the starter template.":"Wrong answer on one or more test cases."))+'</div>';
+  B.innerHTML=msg+chips+'<div class="io"><div><div class="lab">Input</div><pre>'+esc(c[0])+'</pre></div><div><div class="lab">Expected output</div><pre>'+esc(c[1])+'</pre></div><div><div class="lab">Your output</div><pre class="'+(r.ok?"ok":"bad")+'">'+esc(r.got||"(empty)")+'</pre></div></div>';}
+ $("cBody").addEventListener("click",function(e){var b=e.target.closest(".case");if(b){caseIx=+b.dataset.i;renderCases();}});
+ function selC(t){cTab=t;["tCase","tRes"].forEach(function(id){var on=(id==="tCase")===(t==="case");$(id).setAttribute("aria-selected",on);$(id).tabIndex=on?0:-1;});renderCases();}
+ $("tCase").addEventListener("click",function(){openTC(true);selC("case")});$("tRes").addEventListener("click",function(){openTC(true);selC("res")});
+ function openTC(o){$("tc").classList.toggle("closed",!o);$("rightcol").classList.toggle("cclosed",!o);$("cBody").hidden=!o;$("tcTog").setAttribute("aria-expanded",o);$("tcTog").setAttribute("aria-label",o?"Collapse console":"Expand console");$("tcTip").textContent=o?"Collapse":"Expand";}
+ $("tcTog").addEventListener("click",function(){openTC($("cBody").hidden)});
+ $("run").addEventListener("click",run);
+ document.addEventListener("keydown",function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();if(!$("run").disabled)run();}
+  if((e.ctrlKey||e.metaKey)&&(e.key==="s"||e.key==="S")){e.preventDefault();save();}
+  if(e.key==="Escape"){["ovI","ovS","ovR","ovQ"].forEach(function(i){$(i).hidden=true});closeMenu();$("fsPop").hidden=true;$("fs").setAttribute("aria-expanded",false);}
+ });
+
+ /* submit, reset, quit, instructions */
+ function modal(id,open,focus){$(id).hidden=!open;if(open&&focus)$(focus).focus();}
+ $("submit").addEventListener("click",function(){modal("ovS",true,"sN")});
+ $("sN").addEventListener("click",function(){modal("ovS",false);$("submit").focus()});
+ $("sY").addEventListener("click",function(){modal("ovS",false);save(true);var j=judge(src.value),tot=10,pass=j==="pass"?10:0;
+  subs.push({p:cur,ok:pass===tot,pass:pass,tot:tot,l:lang.value,at:new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})});renderSubs();
+  say(pass===tot?"Submitted: all 10 test cases passed":"Submitted: 0 of 10 test cases passed");selTab("tSub");});
+ $("rs").addEventListener("click",function(){modal("ovR",true,"rN")});
+ $("rN").addEventListener("click",function(){modal("ovR",false);$("rs").focus()});
+ $("rY").addEventListener("click",function(){modal("ovR",false);delete code[key()];loadCode();save(true);say("Code reset");src.focus();});
+ $("quit").addEventListener("click",function(){modal("ovQ",true,"qN")});
+ $("qN").addEventListener("click",function(){modal("ovQ",false);$("quit").focus()});
+ $("qY").addEventListener("click",function(){modal("ovQ",false);say("Assessment ended");});
+ $("ins").addEventListener("click",function(){modal("ovI",true,"iC")});
+ $("iC").addEventListener("click",function(){modal("ovI",false);$("ins").focus()});
+ $("back").addEventListener("click",function(){say("Back goes to the section list")});
+ $("sv").addEventListener("click",function(){save()});
+
+ /* font size */
+ $("fs").addEventListener("click",function(e){e.stopPropagation();var o=$("fsPop").hidden;$("fsPop").hidden=!o;$("fs").setAttribute("aria-expanded",o);});
+ $("fsPop").addEventListener("click",function(e){e.stopPropagation();var b=e.target.closest("[data-fs]");if(!b)return;[].forEach.call(this.querySelectorAll("[data-fs]"),function(x){x.setAttribute("aria-pressed",x===b)});var f=+b.dataset.fs;$("code").style.setProperty("--fs",f+"px");$("code").style.setProperty("--lh",(f+8)+"px");});
+
+ /* layout controls */
+ var ws=$("ws");
+ function setMode(m){ws.classList.remove("lcol","emax","lmax");if(m)ws.classList.add(m);
+  $("openL").hidden=m!=="lcol";$("maxE").setAttribute("aria-pressed",m==="emax");$("maxL").setAttribute("aria-pressed",m==="lmax");$("maxL").setAttribute("aria-label",m==="lmax"?"Restore layout":"Expand description");$("maxE").setAttribute("aria-label",m==="emax"?"Restore layout":"Expand editor");}
+ var rc=$("rightcol");
+ function setLW(p){p=Math.max(25,Math.min(65,p));ws.style.setProperty("--lw",p+"%");$("rzX").setAttribute("aria-valuenow",Math.round(p));}
+ function setCH(px){var max=rc.clientHeight-160;px=Math.max(120,Math.min(max,px));rc.style.setProperty("--ch",px+"px");}
+ function drag(el,cls,move){el.addEventListener("pointerdown",function(e){e.preventDefault();el.setPointerCapture(e.pointerId);el.classList.add("drag");document.body.classList.add("dragging",cls);
+  function mv(ev){move(ev)}function up(){el.classList.remove("drag");document.body.classList.remove("dragging",cls);el.removeEventListener("pointermove",mv);el.removeEventListener("pointerup",up);}
+  el.addEventListener("pointermove",mv);el.addEventListener("pointerup",up);});}
+ drag($("rzX"),"col",function(e){var r=ws.getBoundingClientRect();setLW(100*(e.clientX-r.left)/r.width);});
+ drag($("rzY"),"row",function(e){var r=rc.getBoundingClientRect();setCH(r.bottom-e.clientY);});
+ $("rzX").addEventListener("keydown",function(e){var v=+this.getAttribute("aria-valuenow");if(e.key==="ArrowLeft"){setLW(v-2);e.preventDefault();}if(e.key==="ArrowRight"){setLW(v+2);e.preventDefault();}});
+ $("rzY").addEventListener("keydown",function(e){var h=$("tc").offsetHeight;if(e.key==="ArrowUp"){setCH(h+16);e.preventDefault();}if(e.key==="ArrowDown"){setCH(h-16);e.preventDefault();}});
+ $("colL").addEventListener("click",function(){setMode("lcol");$("openL").focus()});
+ $("openL").addEventListener("click",function(){setMode("");$("colL").focus()});
+ $("maxE").addEventListener("click",function(){setMode(ws.classList.contains("emax")?"":"emax")});
+ $("maxL").addEventListener("click",function(){setMode(ws.classList.contains("lmax")?"":"lmax")});
+
+ /* tabs */
+ function selTab(id){["tDesc","tSub"].forEach(function(t){var on=t===id;$(t).setAttribute("aria-selected",on);$(t).tabIndex=on?0:-1;$($(t).getAttribute("aria-controls")).hidden=!on;});}
+ ["tDesc","tSub"].forEach(function(t){$(t).addEventListener("click",function(){selTab(t)})});
+ document.querySelectorAll(".tabs").forEach(function(tl){tl.addEventListener("keydown",function(e){if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;var id=document.activeElement.id,m={tDesc:"tSub",tSub:"tDesc",tCase:"tRes",tRes:"tCase"},n=m[id];if(!n)return;if(n==="tCase"||n==="tRes")selC(n==="tCase"?"case":"res");else selTab(n);$(n).focus();e.preventDefault();});});
+
+ /* problems list */
+ function closeMenu(){$("plMenu").hidden=true;$("plBtn").setAttribute("aria-expanded",false);}
+ function go(i){if(dirty)save(true);cur=i;renderProblem();closeMenu();}
+ $("plBtn").addEventListener("click",function(e){e.stopPropagation();if(!$("plMenu").hidden){closeMenu();return;}
+  $("plMenu").innerHTML=PR.map(function(p,i){var s=subs.filter(function(x){return x.p===i});var st=s.length?(s[s.length-1].ok?'<span class="badge ok">Solved</span>':'<span class="badge bad">Attempted</span>'):'<span class="badge">'+p.d+'</span>';
+   return '<li role="option" tabindex="0" data-i="'+i+'" aria-selected="'+(i===cur)+'">'+(i+1)+'. '+esc(p.t)+st+'</li>'}).join("");
+  $("plMenu").hidden=false;$("plBtn").setAttribute("aria-expanded",true);$("plMenu").querySelector('[aria-selected="true"]').focus();});
+ $("plMenu").addEventListener("click",function(e){var li=e.target.closest("li");if(li){go(+li.dataset.i);$("plBtn").focus();}});
+ $("plMenu").addEventListener("keydown",function(e){var li=e.target.closest("li");if(!li)return;
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();go(+li.dataset.i);$("plBtn").focus();}
+  if(e.key==="ArrowDown"&&li.nextElementSibling){e.preventDefault();li.nextElementSibling.focus();}
+  if(e.key==="ArrowUp"&&li.previousElementSibling){e.preventDefault();li.previousElementSibling.focus();}});
+ document.addEventListener("click",function(){closeMenu();$("fsPop").hidden=true;$("fs").setAttribute("aria-expanded",false);});
+ $("prevP").addEventListener("click",function(){if(cur>0)go(cur-1)});
+ $("nextP").addEventListener("click",function(){if(cur<PR.length-1)go(cur+1)});
+
+ /* timer */
+ var LIMIT=1800,left=1374;function pad(n){return (n<10?"0":"")+n}
+ function tick(){$("tm").textContent=pad(Math.floor(left/60))+" : "+pad(left%60);$("prog").style.width=(100*left/LIMIT)+"%";document.querySelector(".timer").classList.toggle("low",left<=300);}
+ tick();setInterval(function(){if(left>0){left--;tick();}},1000);
+
+ var tt;function say(t){$("toast").textContent=t;$("toast").hidden=false;clearTimeout(tt);tt=setTimeout(function(){$("toast").hidden=true},2000);}
+ renderProblem();updSaved();
+})();
+</script>
+</body></html>
